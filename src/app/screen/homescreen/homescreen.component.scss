@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap');
+
+:host {
+  display: block;
+  padding: 20px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Kanit', sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  position: relative;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  
+  h1 {
+    color: #2c3e50;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  .description {
+    color: #7f8c8d;
+    font-size: 16px;
+  }
+}
+
+.form-section {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  
+  h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+}
+
+.form-group {
+  margin-bottom: 20px;
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #2c3e50;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border 0.3s;
+    
+    &:focus {
+      border-color: #3498db;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    }
+    
+    &.error {
+      border-color: #e74c3c;
+    }
+    
+    &:disabled {
+      background-color: #f8f9fa;
+      cursor: not-allowed;
+    }
+  }
+  
+  .error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .format-hint {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-top: 5px;
+  }
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  
+  button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    &.btn-primary {
+      background-color: #3498db;
+      color: white;
+      
+      &:hover:not(:disabled) {
+        background-color: #2980b9;
+      }
+    }
+    
+    &.btn-danger {
+      background-color: #e74c3c;
+      color: white;
+      
+      &:hover:not(:disabled) {
+        background-color: #c0392b;
+      }
+    }
+    
+    &.btn-success {
+      background-color: #2ecc71;
+      color: white;
+      
+      &:hover:not(:disabled) {
+        background-color: #27ae60;
+      }
+    }
+  }
+}
+
+.table-section {
+  h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  th {
+    background-color: #f8f9fa;
+    font-weight: 500;
+    color: #2c3e50;
+  }
+  
+  tr:hover {
+    background-color: #f8f9fa;
+  }
+}
+
+.barcode-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: white;
+  border-radius: 4px;
+  
+  .barcode {
+    height: 50px;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #7f8c8d;
+  
+  p {
+    margin-top: 10px;
+  }
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  border-radius: 10px;
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+  }
+  
+  p {
+    color: #7f8c8d;
+    font-size: 16px;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.button-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  :host {
+    padding: 10px;
+  }
+  
+  .container {
+    padding: 15px;
+  }
+  
+  .form-section {
+    padding: 15px;
+  }
+  
+  th, td {
+    padding: 10px;
+  }
+  
+  .button-group {
+    flex-direction: column;
+    
+    button {
+      width: 100%;
+    }
+  }
+  
+  .table-responsive {
+    font-size: 14px;
+  }
+}
+
+// เพิ่ม styles สำหรับ action buttons
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  
+  .btn-danger {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    &:hover {
+
+      background: #a93226;
+    }
+    
+    
+    &:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+      
+      &:hover {
+        background: #bdc3c7;
+        transform: none;
+        box-shadow: none;
+      }
+    }
+    
+    // Ripple effect
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s;
+    }
+    
+    &:active::before {
+      width: 100px;
+      height: 100px;
+    }
+    
+    // Icon styles
+    .delete-icon {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s ease;
+    }
+    
+    &:hover .delete-icon {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// สำหรับ tablet
+@media (max-width: 768px) {
+  .action-buttons {
+    .btn-danger {
+      padding: 8px 16px;
+      font-size: 13px;
+      
+      .delete-icon {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+}
+
+// สำหรับ mobile
+@media (max-width: 480px) {
+  .action-buttons {
+    flex-direction: column;
+    gap: 6px;
+    
+    .btn-danger {
+      padding: 10px 12px;
+      font-size: 12px;
+      justify-content: center;
+    }
+  }
+}

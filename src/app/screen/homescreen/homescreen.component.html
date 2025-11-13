@@ -1,0 +1,98 @@
+<div class="container">
+  <header>
+    <h1>ระบบจัดการสินค้า</h1>
+    <p class="description">เพิ่ม ลบ และจัดการข้อมูลสินค้า</p>
+  </header>
+  
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+    <p>กำลังโหลดข้อมูล...</p>
+  </div>
+  
+  <section class="form-section">
+    <h2>เพิ่มสินค้าใหม่</h2>
+    <div class="form-group">
+      <label for="productCode">รหัสสินค้า</label>
+      <input 
+        type="text" 
+        id="productCode" 
+        [(ngModel)]="productCode"
+        (input)="onProductCodeInput($event)"
+        (keypress)="onKeyPress($event)"
+        placeholder="XXXX-XXXX-XXXX-XXXX" 
+        maxlength="19"
+        [class.error]="errorMessage"
+        [disabled]="isSubmitting">
+      
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      
+      <div class="format-hint">
+        รูปแบบ: XXXX-XXXX-XXXX-XXXX (ตัวเลข 0-9 หรือตัวอักษร A-Z เท่านั้น)
+      </div>
+    </div>
+    
+    <div class="button-group">
+      <button 
+        class="btn-primary" 
+        (click)="addProduct()"
+        [disabled]="isSubmitting || !productCode.trim()">
+        <span *ngIf="isSubmitting" class="button-spinner"></span>
+        {{ isSubmitting ? 'กำลังเพิ่ม...' : 'เพิ่มสินค้า' }}
+      </button>
+      
+      <button 
+        class="btn-success" 
+        (click)="clearForm()"
+        [disabled]="isSubmitting">
+        ล้างข้อมูล
+      </button>
+    </div>
+  </section>
+  
+  <section class="table-section">
+    <h2>รายการสินค้า</h2>
+    
+    <div *ngIf="products.length === 0 && !isLoading" class="empty-state">
+      <p>ยังไม่มีข้อมูลสินค้า กรุณาเพิ่มสินค้าใหม่</p>
+    </div>
+    
+    <div *ngIf="products.length > 0" class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>ลำดับ</th>
+            <th>รหัสสินค้า</th>
+            <th>บาร์โค้ด</th>
+            <th>จัดการ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ product.product_code }}</td>
+            <td>
+            <svg
+              class="barcode"
+              appBarcode
+              [value]="product.product_code"
+            ></svg>
+          </td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-danger" (click)="deleteProduct(product)">
+                  <svg class="delete-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+    </svg>
+                  ลบ
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
